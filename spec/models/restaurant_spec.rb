@@ -52,6 +52,15 @@ describe Restaurant do
       restaurant.ls_id.should   == "7356"
     end
     
+    it "can pass in specific LS ID if known" do
+      known_ls_id  = "1234"
+      scraped_page = Nokogiri::HTML(File.open('spec/support/assets/ls_toad_show_dc_indian_delight.html'))
+      restaurant = Restaurant.import_from_ls_page scraped_page, known_ls_id
+      restaurant.name.should    == "Indian Delight"
+      restaurant.address.should == "1100 Pennsylvania Avenue NW Washington, DC 20004"
+      restaurant.ls_id.should   == known_ls_id
+    end
+    
     it "does not import the same restaurant twice" do
       scraped_page = Nokogiri::HTML(File.open('spec/support/assets/ls_toad_show_dc_indian_delight.html'))
       expect { 
