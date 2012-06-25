@@ -1,3 +1,26 @@
+== Cane and Reek rubrick
+
+In your project's Gemfile, you must add these two dependencies:
+
+ gem 'reek', :git => "git://github.com/mvz/reek.git", :branch => "ripper_ruby_parser-2"
+ gem 'cane', :git => "git://github.com/square/cane.git"
+
+RUN REEK:
+bundle exec reek app/**/*.rb | grep "TooManyStatements\|UncommunicativeVariableName\|LongMethod"
+
+RUN CANE:
+bundle exec cane --style-glob 'app/**/*.rb' --abc-glob 'app/**/*.rb' --no-doc
+
+RESULTS & RUBRIC:
+Since we decided to forego the documentation complaints from the two
+tools, I've revised the rubric section to the following...
+
+3. Code Style
+ * 3: Source code generates no complaints from Cane or Reek
+ * 2: Source code generates three or fewer warnings
+ * 1: Source code generates four to eight warnings
+ * 0: Source code generates more than eight warnings
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create
