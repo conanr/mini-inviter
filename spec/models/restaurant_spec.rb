@@ -16,6 +16,16 @@ describe Restaurant do
     restaurant = Restaurant.create(name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342")
     restaurant.ls_id.should == "2342"
   end
+  
+  it "has a latitude coordinate" do
+    restaurant = Restaurant.create(name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342")
+    restaurant.latitude.should == 38.89935699999999
+  end
+
+  it "has a longitude coordinate" do
+    restaurant = Restaurant.create(name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342")
+    restaurant.longitude.should == -77.033068
+  end
 
   it "requires a name" do
     restaurant = Restaurant.create()

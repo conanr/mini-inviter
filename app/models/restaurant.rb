@@ -1,5 +1,9 @@
 class Restaurant < ActiveRecord::Base
   attr_accessible :address, :name, :ls_id
+  
+  geocoded_by :address
+  after_validation :geocode
+  
   validates :name, presence: true
   validates :address, presence: true
   validates :ls_id, presence: true, uniqueness: true
