@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
 gem 'jquery-rails'
+gem 'nokogiri'
 gem 'sqlite3'
 
 # Gems used only for assets and not required
