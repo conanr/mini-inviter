@@ -1,12 +1,14 @@
 require 'spec_helper'
 
 describe Event do
-  let!(:event_attributes) { { name:     "Eric's Birthday Party", 
-                              street1:  "1445 New York Ave. NW",
-                              street2:  "Suite 201",
-                              city:     "Washington",
-                              state:    "DC",
-                              zip_code: "20005" } }
+  let!(:event_attributes) { { name:       "Eric's Birthday Party", 
+                              street1:    "1445 New York Ave. NW",
+                              street2:    "Suite 201",
+                              city:       "Washington",
+                              state:      "DC",
+                              zip_code:   "20005",
+                              start_time: Time.parse("May 30, 2013 12:00PM"),
+                              duration:   60*4 } }
   
   it 'requires a non-blank name' do
     event_attributes[:name] = nil
@@ -91,6 +93,26 @@ describe Event do
     event.update_attribute :zip_code, "20005-1234"
     event.valid?.should be_true
     event.zip_code.should == "20005-1234"
+  end
+  
+  it 'requires a start time' do
+    event_attributes[:start_time] = nil
+    event = Event.create event_attributes
+    event.valid?.should be_false
+    
+    event.update_attribute :start_time, Time.parse("May 30, 2013 12:00PM")
+    event.valid?.should be_true
+    event.start_time.should == Time.parse("May 30, 2013 12:00PM")
+  end
+  
+  it 'requires a duration in minutes' do
+    event_attributes[:duration] = nil
+    event = Event.create event_attributes
+    event.valid?.should be_false
+    
+    event.update_attribute :duration, 60
+    event.valid?.should be_true
+    event.duration.should == 60
   end
   
   describe '#address' do
