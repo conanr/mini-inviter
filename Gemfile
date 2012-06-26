@@ -20,6 +20,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'growl'
   gem 'simplecov'
+  gem 'factory_girl'
   gem 'reek', :git => "git://github.com/mvz/reek.git"
   gem 'cane', :git => "git://github.com/square/cane.git"
 end

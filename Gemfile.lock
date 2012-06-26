@@ -57,6 +57,8 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (3.5.0)
+      activesupport (>= 3.0.0)
     ffi (1.0.11)
     geocoder (1.1.2)
     growl (1.0.3)
@@ -166,6 +168,7 @@ PLATFORMS
 DEPENDENCIES
   cane!
   coffee-rails (~> 3.2.1)
+  factory_girl
   geocoder
   growl
   guard-rspec

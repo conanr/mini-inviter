@@ -7,6 +7,14 @@ class Event < ActiveRecord::Base
   validate  :is_a_valid_state?
   validate  :is_a_valid_zip_code?
   
+  def nearby_restaurants
+    Restaurant.all_close_to address
+  end
+  
+  def address
+    [street1, street2, city, state].join(", ").gsub(", ,", ",") + " #{zip_code}"
+  end
+  
   private
 
   def is_a_valid_state? 
