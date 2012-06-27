@@ -16,3 +16,6 @@
 
 # Ignore Simplecov files
 /coverage
+
+# Ignore POW files
+.powenv

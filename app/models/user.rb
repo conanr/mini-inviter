@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :foursquare_id, :first_name, :last_name
 
+  has_many :events
+
   validates :email, presence: true, uniqueness: true
   validates :foursquare_id, presence: true, uniqueness: true
 
@@ -9,5 +11,9 @@ class User < ActiveRecord::Base
       first_name: oauth_hash["info"]["first_name"],
       last_name: oauth_hash["info"]["last_name"],
       email: oauth_hash["info"]["email"])
+  end
+
+  def name
+    "#{first_name}#{last_name ? ' ' + last_name : ''}"
   end
 end

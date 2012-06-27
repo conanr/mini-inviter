@@ -8,6 +8,7 @@ require File.expand_path("../../config/environment", __FILE__)
 
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'capybara/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -36,4 +37,12 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   
   FactoryGirl.find_definitions
+  
+  OmniAuth.config.test_mode = true
+
+  OmniAuth.config.mock_auth[:foursquare] = OmniAuth::AuthHash.new({
+      :provider => 'foursquare',
+      :uid      => "1234",
+      :info     => { :first_name => "Paula", :last_name =>"Brewman", :email => "dcbrewman@example.org" }
+  })
 end

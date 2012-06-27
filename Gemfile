@@ -1,11 +1,18 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.6'
-gem 'jquery-rails'
+gem 'pg'
+
+gem 'omniauth'
+gem 'omniauth-foursquare'
+
 gem 'nokogiri'
 gem 'geocoder'
 gem 'hashie'
-gem 'pg'
+
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'twitter-bootstrap-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -20,6 +27,8 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'growl'
   gem 'simplecov'
+  gem 'capybara'
+  gem 'launchy'
   gem 'factory_girl'
   gem 'reek', :git => "git://github.com/mvz/reek.git"
   gem 'cane', :git => "git://github.com/square/cane.git"
