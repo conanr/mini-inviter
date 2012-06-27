@@ -39,6 +39,29 @@ describe Authentication do
   end
   
   it "may have a token" do
+    auth = Authentication.create auth_attributes
+    auth.token.should == "3NH22I530TIAIY5CXWPMUD44LT0D2FEDY0IBX0NY2QNE1SNL"
+  end
+  
+  describe '.from_oauth_hash' do
+    let!(:user)       { FactoryGirl.create :user }
+    let!(:oauth_hash) { Hashie::Mash.new(JSON.parse(File.read("spec/support/assets/foursquare_oauth_hash_test_account.txt"))) }
     
+    it 'creates a new authentication if none already exist for the user' do
+      auth = Authentication.from_oauth_hash(user, oauth_hash)
+      auth.provider.should  == "foursquare"
+      auth.uid.should       == "1234"
+      auth.token.should     == "3NH22I530TIAIY5CXWPMUD44LT0D2FEDY0IBX0NY2QNE1SNL"
+      user.authentications.last.should == auth
+    end
+    
+    it 'returns an authentication if one already exist for the user' do
+      Authentication.from_oauth_hash(user, oauth_hash)
+      auth = Authentication.from_oauth_hash(user, oauth_hash)
+      auth.provider.should  == "foursquare"
+      auth.uid.should       == "1234"
+      auth.token.should     == "3NH22I530TIAIY5CXWPMUD44LT0D2FEDY0IBX0NY2QNE1SNL"
+      user.authentications.last.should == auth
+    end
   end
 end

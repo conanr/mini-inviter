@@ -1,15 +1,18 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name
-
+  
+  has_many :authentications
   has_many :events
 
   validates :email, presence: true, uniqueness: true
 
-  def self.create_from_oauth_hash(oauth_hash)
-    find_or_create_by_email(
-      email: oauth_hash["info"]["email"],
+  def self.from_oauth_hash(oauth_hash)
+    user = find_or_create_by_email(
+      email:      oauth_hash["info"]["email"],
       first_name: oauth_hash["info"]["first_name"],
-      last_name: oauth_hash["info"]["last_name"])
+      last_name:  oauth_hash["info"]["last_name"])
+    Authentication.from_oauth_hash(user, oauth_hash)
+    user
   end
 
   def name

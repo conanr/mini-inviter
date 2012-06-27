@@ -10,10 +10,10 @@ describe User do
     user2.valid?.should be_false
   end
   
-  describe ".create_from_oauth" do
+  describe ".from_oauth_hash" do
     it "creates a new user using oauth hash after Foursquare auth" do
       oauth_hash = Hashie::Mash.new(JSON.parse(File.read("spec/support/assets/foursquare_oauth_hash_test_account.txt")))
-      user = User.create_from_oauth_hash oauth_hash
+      user = User.from_oauth_hash oauth_hash
       user.valid?.should be_true
       user.first_name.should    == "Paula"
       user.last_name.should     == "Brewman"
@@ -23,8 +23,8 @@ describe User do
     it "does not create two user records for the same foursquare user" do
       oauth_hash = Hashie::Mash.new(JSON.parse(File.read("spec/support/assets/foursquare_oauth_hash_test_account.txt")))
       expect {
-        User.create_from_oauth_hash oauth_hash
-        User.create_from_oauth_hash oauth_hash
+        User.from_oauth_hash oauth_hash
+        User.from_oauth_hash oauth_hash
       }.to change { User.count }.by 1
     end
   end
@@ -32,7 +32,7 @@ describe User do
   describe "#name" do
     it "returns a string containing the first and last name of the user" do
       oauth_hash = Hashie::Mash.new(JSON.parse(File.read("spec/support/assets/foursquare_oauth_hash_test_account.txt")))
-      user = User.create_from_oauth_hash oauth_hash
+      user = User.from_oauth_hash oauth_hash
       user.name.should == "Paula Brewman"
     end
   end
