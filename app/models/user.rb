@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :first_name, :last_name
   
-  has_many :authentications
-  has_many :events
+  has_many :authentications, :dependent => :destroy
+  has_many :events, :dependent => :destroy
 
   validates :email, presence: true, uniqueness: true
 

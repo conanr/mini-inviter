@@ -12,7 +12,7 @@ Inviter::Application.routes.draw do
   match 'step_3',    to: 'events#show_step_3',    as: 'step_3'
   match 'process_step_3', to: 'events#process_step_3'
   match 'step_4',    to: 'events#show_step_4',    as: 'step_4'
-  resources :event, only: [:create, :show, :index]
+  resources :events, except: [:destroy]
   
   root :to => 'application#index'
   
