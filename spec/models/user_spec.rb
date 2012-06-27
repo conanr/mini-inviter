@@ -1,21 +1,12 @@
 require 'spec_helper'
 
 describe User do
-  it "requires a unique foursquare id" do
-    user = User.create first_name: "Paula", email: "paula@example.com"
-    user.valid?.should be_false
-    user.update_attribute :foursquare_id, "1234"
-    user.valid?.should be_true
-    user2 = User.create first_name: "Chris", email: "chris@example.com", foursquare_id: "1234"
-    user2.valid?.should be_false
-  end
-  
   it "requires a unique email" do
-    user = User.create first_name: "Paula", foursquare_id: "1234"
+    user = User.create first_name: "Paula"
     user.valid?.should be_false
     user.update_attribute :email, "paula@example.com"
     user.valid?.should be_true
-    user2 = User.create first_name: "Paula", email: "paula@example.com", foursquare_id: "5678"
+    user2 = User.create first_name: "Paula", email: "paula@example.com"
     user2.valid?.should be_false
   end
   
@@ -27,7 +18,6 @@ describe User do
       user.first_name.should    == "Paula"
       user.last_name.should     == "Brewman"
       user.email.should         == "dcbrewman@example.com"
-      user.foursquare_id.should == "1234"
     end
     
     it "does not create two user records for the same foursquare user" do
