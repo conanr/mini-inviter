@@ -43,6 +43,21 @@ RSpec.configure do |config|
   OmniAuth.config.mock_auth[:foursquare] = OmniAuth::AuthHash.new({
       :provider => 'foursquare',
       :uid      => "1234",
-      :info     => { :first_name => "Paula", :last_name =>"Brewman", :email => "dcbrewman@example.org" }
+      :info     => { :first_name => "Paula", :last_name => "Brewman", :email => "dcbrewman@example.org" },
+      :credentials => { :token => "3NH22I530TIAIY5CXWPMUD44LT0D2FEDY0IBX0NY2QNE1SNL" }
+  })
+
+  OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new({
+      :provider => 'facebook',
+      :uid      => "098765",
+      :info     => { :first_name => "Niels", :last_name => "Bohr", :email => "n.bohr@example.org" },
+      :credentials => { :token => "PMUD44LT0D2FEDY0IBX0NY2QNE1SNL3NH22I530TIAIY5CXW" }
+  })
+
+  OmniAuth.config.mock_auth[:twitter] = OmniAuth::AuthHash.new({
+      :provider => 'twitter',
+      :uid      => "1234",
+      :info     => { :first_name => "Tamara", :last_name => "Cane", :email => "t.cane@example.org" },
+      :credentials => { :token => "D2FEDY0IBX0NY2QNE1SNL3NH22I530TIAIY5CXWPMUD44LT0" }
   })
 end

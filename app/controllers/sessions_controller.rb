@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   end
   
   def create
-    user = User.create_from_oauth_hash(env["omniauth.auth"])
+    user = User.from_oauth_hash(env["omniauth.auth"])
     session[:user_id] = user.id
     redirect_to root_url, notice: "Signed in!"
   end
