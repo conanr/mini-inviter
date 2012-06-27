@@ -31,12 +31,27 @@
           <a class="brand" href="#">Inviter</a>
           <div class="container-fluid nav-collapse">
             <ul class="nav">
+              <% if current_user %>
+                <li><%= current_user.name %></li>
+                <li><%= link_to "Sign out", signout_path, id: "signout" %></li>
+              <% else %>
+                <li><%= link_to "Sign in", signin_path, id: "signin" %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
-    
+
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span9">
+          <%= yield %>
+        </div>
+      </div><!--/row-->
+
+    </div> <!-- /container -->
+
     <!-- Javascripts
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
