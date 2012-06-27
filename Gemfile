@@ -4,6 +4,7 @@ gem 'rails', '3.2.6'
 gem 'pg'
 
 gem 'omniauth'
+gem 'omniauth-facebook'
 gem 'omniauth-foursquare'
 
 gem 'nokogiri'

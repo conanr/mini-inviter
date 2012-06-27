@@ -121,6 +121,8 @@ GEM
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
+    omniauth-facebook (1.4.0)
+      omniauth-oauth2 (~> 1.0.2)
     omniauth-foursquare (0.0.7)
       omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
@@ -235,6 +237,7 @@ DEPENDENCIES
   launchy
   nokogiri
   omniauth
+  omniauth-facebook
   omniauth-foursquare
   pg
   rails (= 3.2.6)
