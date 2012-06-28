@@ -2,6 +2,6 @@
   <h1 class='title'><%= @event.name %></h1>
   <h3><%= @event.start_time %></h3>
   <h3><%= @event.full_address %></h3>
-  <h3><%= @restaurant_names %></h3>
+  <h3><%= display_restaurant_names @event %></h3>
 </div>
 <%= render :partial => 'form' %>

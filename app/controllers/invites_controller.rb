@@ -3,7 +3,6 @@ class InvitesController < ApplicationController
   
   def new
     @event = Event.find params[:event_id]
-    @restaurant_names = @event.restaurant_options.collect { |ro| ro.restaurant.name }.join(", ")
   end
   
   def create
