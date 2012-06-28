@@ -23,12 +23,12 @@ describe Event do
     it 'displays the full address'
   end
   
-  # describe '#nearby_restaurants' do
-  #   let!(:event)      { Event.create event_attributes  }
-  #   let!(:restaurant) { FactoryGirl.create :restaurant }
-  # 
-  #   it 'returns a collection of nearby restaurants' do
-  #     event.nearby_restaurants.include?(restaurant).should be_true
-  #   end
-  # end
+  describe '#nearby_restaurants' do
+    let!(:event)      { FactoryGirl.create :event }
+    let!(:restaurant) { FactoryGirl.create :restaurant }
+  
+    it 'returns a collection of nearby restaurants' do
+      event.nearby_restaurants.include?(restaurant).should be_true
+    end
+  end
 end

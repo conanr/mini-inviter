@@ -3,6 +3,10 @@ require 'spec_helper'
 describe "Creating an new event" do
   context "as a brand new user" do
     context "from the home page" do
+      let!(:restaurant_1) { FactoryGirl.create :sushi_go_round }
+      let!(:restaurant_2) { FactoryGirl.create :cafe_mozart }
+      let!(:restaurant_3) { FactoryGirl.create :mayur_kabob_house }
+      
       before(:each) do
         visit root_path
       end
@@ -45,6 +49,12 @@ describe "Creating an new event" do
         end
         
         # select a restaurant from list
+        within '#restaurant_selection' do
+          check restaurant_2.name
+        end
+        page.find("#submit_selection_form").click
+        page.should have_content restaurant_2.name
+        
         # invite a friend
         # send the invitations
         

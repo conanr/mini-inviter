@@ -9,6 +9,6 @@ class AddressesController < ApplicationController
   def create
     @event = Event.find params[:event_id]
     @event.address = Address.create params[:address]
-    redirect_to event_path @event
+    redirect_to new_event_restaurant_option_path @event
   end
 end
