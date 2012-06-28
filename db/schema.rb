@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628145508) do
+ActiveRecord::Schema.define(:version => 20120628174050) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "event_id"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(:version => 20120628145508) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "contacts", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "events", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
@@ -41,6 +49,13 @@ ActiveRecord::Schema.define(:version => 20120628145508) do
   end
 
   add_index "events", ["user_id"], :name => "index_events_on_user_id"
+
+  create_table "invites", :force => true do |t|
+    t.integer  "event_id"
+    t.integer  "contact_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "restaurant_options", :force => true do |t|
     t.integer  "event_id"

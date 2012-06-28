@@ -11,6 +11,6 @@ class RestaurantOptionsController < ApplicationController
     params[:restaurant].keys.each do |r| 
       @event.restaurant_options << RestaurantOption.create(restaurant_id: r)
     end
-    redirect_to event_path @event
+    redirect_to new_event_invite_path @event
   end
 end

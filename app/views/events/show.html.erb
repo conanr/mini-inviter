@@ -12,11 +12,19 @@
   <dd><%= @event.start_time %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd><%= @event.full_address %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:restaurant_options) %>:</strong></dt>
+  <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
   <dd>
     <ul>
       <% @event.restaurant_options.each do |ro| %>
         <li><%= ro.restaurant.name %></li>
+      <% end %>
+    </ul>
+  </dd>
+  <dt><strong><%= model_class.human_attribute_name(:invites) %>:</strong></dt>
+  <dd>
+    <ul>
+      <% @event.invites.each do |i| %>
+        <li><%= i.contact.name %> (<%= i.contact.email %>)</li>
       <% end %>
     </ul>
   </dd>

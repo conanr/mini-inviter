@@ -56,6 +56,21 @@ describe "Creating an new event" do
         page.should have_content restaurant_2.name
         
         # invite a friend
+        invitees = [ { name: "John Doe",    email: "joedoe@example.com" },
+                     { name: "Paula Jones", email: "p.jones@example.com" },
+                     { name: "Tom Paine",   email: "t.paine@example" } ]
+        within '#event_invite_form' do
+          invitees.each_with_index do |invitee, i|
+            fill_in "new_contacts[#{i+1}][name]",  with: invitee[:name]
+            fill_in "new_contacts[#{i+1}][email]", with: invitee[:email]
+          end
+        end
+        page.find("#submit_event_invite_form").click
+        invitees.each do |invitee|
+          page.should have_content invitee[:name]
+          page.should have_content invitee[:email]
+        end
+
         # send the invitations
         
         # view the results
