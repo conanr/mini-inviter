@@ -15,16 +15,18 @@ describe "Creating an new event" do
         # login
         page.find("#get_started").click
         page.find("#foursquare_login").click
+        page.find(".navbar").should have_content "Paula Brewman"
         
-        # create the event
+        # create the stub event
+        party_name = "My Birthday Party"
         page.find("#get_started").click
         within '#event_form' do
-          fill_in 'event_name', with: "My Birthday Party"
+          fill_in 'event_name', with: party_name
         end
         page.find("#submit_event_form").click
-        page.should have_content "My Birthday Party"
+        page.should have_content party_name
         
-        # fill in date form
+        # set a start time for the event
         start_time = 3.days.from_now
         within '#event_time_form' do
           select start_time.strftime('%Y'),  from: 'schedule_start_time_1i'
@@ -36,7 +38,7 @@ describe "Creating an new event" do
         page.find("#submit_event_time_form").click
         page.should have_content start_time.strftime('%F %R')
         
-        # fill in address form
+        # set a place for the event
         party_place = { street1: "1445 New York Ave. NW", street2: "Suite #200", city: "Washington", state: "DC", zip_code: "20005" }
         within '#event_address_form' do
           party_place.each do |p|
@@ -48,14 +50,14 @@ describe "Creating an new event" do
           page.should have_content p.last
         end
         
-        # select a restaurant from list
+        # select restaurants for the event
         within '#restaurant_selection' do
           check restaurant_2.name
         end
         page.find("#submit_selection_form").click
         page.should have_content restaurant_2.name
         
-        # invite a friend
+        # invite friends to the event
         invitees = [ { name: "John Doe",    email: "joedoe@example.com" },
                      { name: "Paula Jones", email: "p.jones@example.com" },
                      { name: "Tom Paine",   email: "t.paine@example" } ]
@@ -66,15 +68,17 @@ describe "Creating an new event" do
           end
         end
         page.find("#submit_event_invite_form").click
+        
+        # verify the event details are displayed
+        page.should have_content party_name
+        page.should have_content start_time.strftime('%F %R')
+        party_place.each do |p|
+          page.should have_content p.last
+        end
         invitees.each do |invitee|
           page.should have_content invitee[:name]
           page.should have_content invitee[:email]
         end
-
-        # send the invitations
-        
-        # view the results
-        
       end
     end
   end
