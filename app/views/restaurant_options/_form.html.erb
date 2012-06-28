@@ -1,0 +1,15 @@
+<%= form_tag event_restaurant_options_path, method: :post, id: "restaurant_selection" do |f| %>
+  <div class="control-group">
+    <div class="controls">
+      <% @nearby_restaurants.each do |restaurant| %>
+        <%= check_box_tag "restaurant[#{restaurant.id}]" %>
+        <%= label_tag "restaurant[#{restaurant.id}]", restaurant.name %>
+      <% end %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= submit_tag nil, :class => 'btn btn-primary', :id => 'submit_selection_form' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                root_path, :class => 'btn' %>
+  </div>
+<% end %>
