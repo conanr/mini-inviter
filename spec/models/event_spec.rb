@@ -23,18 +23,6 @@ describe Event do
   #                             zip_code:   "20005",
   #                             start_time: Time.parse("May 30, 2013 12:00PM") } }
   # 
-  # it 'requires a non-blank name' do
-  #   event_attributes[:name] = nil
-  #   event = Event.create event_attributes
-  #   event.valid?.should be_false
-  #   
-  #   event.update_attribute :name, "    "
-  #   event.valid?.should be_false
-  # 
-  #   event.update_attribute :name, "Eric's Birthday Party"
-  #   event.valid?.should be_true
-  #   event.name.should == "Eric's Birthday Party"
-  # end
   # 
   # it 'requires a non-blank primary street address' do
   #   event_attributes[:street1] = nil
@@ -106,19 +94,6 @@ describe Event do
   #   event.update_attribute :zip_code, "20005-1234"
   #   event.valid?.should be_true
   #   event.zip_code.should == "20005-1234"
-  # end
-  # 
-  # it 'requires a vaid start time' do
-  #   event_attributes[:start_time] = nil
-  #   event = Event.create event_attributes
-  #   event.valid?.should be_false
-  # 
-  #   event.update_attribute :start_time, Time.parse("Jan 01, 2009 12:00PM")
-  #   event.valid?.should be_false
-  #   
-  #   event.update_attribute :start_time, Time.parse("May 30, 2013 12:00PM")
-  #   event.valid?.should be_true
-  #   event.start_time.should == Time.parse("May 30, 2013 12:00PM")
   # end
   # 
   # describe '#address' do

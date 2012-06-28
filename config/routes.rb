@@ -4,15 +4,19 @@ Inviter::Application.routes.draw do
   
   match 'signin',   to: 'sessions#new',     as: 'signin'
   match 'signout',  to: 'sessions#destroy', as: 'signout'
+
+  resources :events, except: [:destroy] do
+    resources :schedules, only: [:new, :create]
+  end
   
-  match 'step_1',    to: 'events#show_step_1',    as: 'step_1'
-  match 'process_step_1', to: 'events#process_step_1'
-  match 'step_2',    to: 'events#show_step_2',    as: 'step_2'
-  match 'process_step_2', to: 'events#process_step_2'
-  match 'step_3',    to: 'events#show_step_3',    as: 'step_3'
-  match 'process_step_3', to: 'events#process_step_3'
-  match 'step_4',    to: 'events#show_step_4',    as: 'step_4'
-  resources :events, except: [:destroy]
+  # match 'step_1',    to: 'events#show_step_1',    as: 'step_1'
+  # match 'process_step_1', to: 'events#process_step_1'
+  # match 'step_2',    to: 'events#show_step_2',    as: 'step_2'
+  # match 'process_step_2', to: 'events#process_step_2'
+  # match 'step_3',    to: 'events#show_step_3',    as: 'step_3'
+  # match 'process_step_3', to: 'events#process_step_3'
+  # match 'step_4',    to: 'events#show_step_4',    as: 'step_4'
+
   
   root :to => 'application#index'
   

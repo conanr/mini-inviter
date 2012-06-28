@@ -14,7 +14,7 @@ class EventsController < ApplicationController
   
   def create
     @event = current_user.events.create params[:event]
-    redirect_to event_path @event
+    redirect_to new_event_schedule_path @event
   end
   
 #   def show_step_1

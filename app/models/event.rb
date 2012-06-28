@@ -3,9 +3,14 @@ class Event < ActiveRecord::Base
 
   # :city, :state, :street1, :street2, :zip_code, :start_time
 
-  belongs_to :user
+  belongs_to  :user
+  has_one     :schedule
 
-  validates :name,    presence: true, allow_blank: false
+  validates :name, presence: true, allow_blank: false
+  
+  def start_time
+    schedule.start_time
+  end
   # validates :street1, presence: true, allow_blank: false
   # validates :city,    presence: true, allow_blank: false
   # validate  :has_a_valid_state?
