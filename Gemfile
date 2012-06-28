@@ -31,6 +31,7 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'factory_girl'
+  gem 'faker'
   gem 'reek', :git => "git://github.com/mvz/reek.git"
   gem 'cane', :git => "git://github.com/square/cane.git"
 end
