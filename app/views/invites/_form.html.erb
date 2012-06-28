@@ -1,0 +1,16 @@
+<%= form_tag event_invites_path, method: :post, id: "event_invite_form" do |f| %>
+  <% (1..5).each do |i| %>
+    <div class="control-group">
+      <div class="controls">
+        <%= label_tag "new_contacts[#{i}][name]", "Contact ##{i}"%>
+        <%= text_field_tag "new_contacts[#{i}][name]" %>
+        <%= text_field_tag "new_contacts[#{i}][email]" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="form-actions">
+    <%= submit_tag nil, :class => 'btn btn-primary', :id => 'submit_event_invite_form' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                root_path, :class => 'btn' %>
+  </div>
+<% end %>

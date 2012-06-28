@@ -1,0 +1,13 @@
+<%= form_for [@event, @schedule], :html => { :class => 'form-horizontal', :id => 'event_time_form' } do |f| %>
+  <div class="control-group">
+    <%= f.label :start_time, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.datetime_select :start_time, :class => 'datetime_select' %>
+    </div>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary', :id => 'submit_event_time_form' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                root_path, :class => 'btn' %>
+  </div>
+<% end %>
