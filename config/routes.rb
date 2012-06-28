@@ -5,11 +5,15 @@ Inviter::Application.routes.draw do
   match 'signin',   to: 'sessions#new',     as: 'signin'
   match 'signout',  to: 'sessions#destroy', as: 'signout'
 
+  match 'vote_for_restaurant', to: 'restaurant_votes#create', as: 'vote_for_restaurant'
+
   resources :events, except: [:destroy] do
     resources :schedules, only: [:new, :create]
     resources :addresses, only: [:new, :create]
-    resources :restaurant_options, only: [:new, :create]
     resources :invites, only: [:new, :create]
+    resources :restaurant_options, only: [:new, :create] do
+      resources :restaurant_votes, only: [:create, :show]
+    end
   end
 
   root :to => 'application#index'
