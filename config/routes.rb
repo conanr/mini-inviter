@@ -7,6 +7,7 @@ Inviter::Application.routes.draw do
 
   resources :events, except: [:destroy] do
     resources :schedules, only: [:new, :create]
+    resources :addresses, only: [:new, :create]
   end
   
   # match 'step_1',    to: 'events#show_step_1',    as: 'step_1'

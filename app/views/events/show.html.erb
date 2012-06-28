@@ -10,6 +10,8 @@
   <dd><%= @event.user_id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_time) %>:</strong></dt>
   <dd><%= @event.start_time %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
+  <dd><%= @event.full_address %></dd>
 </dl>
 
 <div class="form-actions">
