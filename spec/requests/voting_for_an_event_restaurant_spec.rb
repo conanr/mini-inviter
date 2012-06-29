@@ -19,6 +19,15 @@ describe 'voting for an event restaurant' do
         event.restaurant_options.find(restaurant_option_2.id).vote_count.should == 1
         event.restaurant_options.find(restaurant_option_1.id).vote_count.should == 0
       end
+      
+      context "trying to vote twice using the same invite" do
+        before :each do
+          visit vote_for_restaurant_path invite_id: invite.id, option_id: restaurant_option_2.id
+        end
+        it "registers a vote for the selected restaurant" do
+          event.restaurant_options.find(restaurant_option_2.id).vote_count.should == 1
+        end
+      end
     end
   end
 end

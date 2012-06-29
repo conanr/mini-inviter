@@ -3,4 +3,6 @@ class RestaurantVote < ActiveRecord::Base
   
   belongs_to :restaurant_option
   belongs_to :invite
+  
+  validates :invite_id, uniqueness: true
 end

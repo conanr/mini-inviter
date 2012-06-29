@@ -8,8 +8,12 @@ class RestaurantVotesController < ApplicationController
     option  = RestaurantOption.find(params[:option_id])
     @vote   = RestaurantVote.create(invite_id: invite.id, 
                                     restaurant_option_id: option.id)
-    redirect_to event_restaurant_option_restaurant_vote_path(
-                  build_path_params(invite, option, @vote))
+    unless @vote.errors
+      redirect_to event_restaurant_option_restaurant_vote_path(
+                    build_path_params(invite, option, @vote))
+    else
+      redirect_to root_path
+    end
   end
   
   private
