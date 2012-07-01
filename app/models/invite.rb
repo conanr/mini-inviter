@@ -4,4 +4,7 @@ class Invite < ActiveRecord::Base
   belongs_to  :contact
   belongs_to  :event
   has_one     :restaurant_vote
+  
+  delegate    :email, to: :contact
+  delegate    :name, to: :contact
 end
