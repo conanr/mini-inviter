@@ -69,6 +69,7 @@ describe EventMailer do
         it "contains links to each of the event's restaurants" do
           event.restaurant_options.each do |ro|
             mailer_body.find("#restaurant_#{ro.id}").should have_content ro.name
+            mailer_body.find("#restaurant_#{ro.id}")['href'].should ==  vote_for_restaurant_url(invite_id: invite.id, option_id: ro.id)
           end
         end
       end

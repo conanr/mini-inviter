@@ -9,7 +9,7 @@
     <div id="restaturant_picker">Vote on which restaurant you want food from:
       <ul>
         <% @event.restaurant_options.each do |ro| %>
-          <li><%= link_to ro.name, vote_for_restaurant_path(invite_id: @invite.id, option_id: ro.id), id: "restaurant_#{ro.id}" %></li>
+          <li><%= link_to ro.name, vote_for_restaurant_url(invite_id: @invite.id, option_id: ro.id), id: "restaurant_#{ro.id}" %></li>
         <% end %>
       </ul>
     </div>

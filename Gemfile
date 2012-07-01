@@ -10,6 +10,8 @@ gem 'omniauth-foursquare'
 gem 'nokogiri'
 gem 'geocoder'
 gem 'hashie'
+gem 'resque'
+gem 'resque_mailer'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
