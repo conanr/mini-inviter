@@ -38,4 +38,6 @@ describe Contact do
     contact.update_attributes contact_attributes
     contact.valid?.should be_true
   end
+  
+  it "can not be a duplicate of an existing contact for the user"
 end

@@ -4,6 +4,8 @@ class RestaurantOption < ActiveRecord::Base
   belongs_to  :event
   belongs_to  :restaurant
   has_many    :restaurant_votes
+
+  delegate    :name, to: :restaurant
   
   def vote_count
     restaurant_votes.count
