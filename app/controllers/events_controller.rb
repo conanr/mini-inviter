@@ -6,6 +6,9 @@ class EventsController < ApplicationController
   
   def show
     @event = Event.find params[:id]
+    unless @event.user_id == current_user.id
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
   def new
