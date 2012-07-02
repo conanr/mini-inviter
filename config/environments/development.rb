@@ -23,7 +23,7 @@ Inviter::Application.configure do
     :password             => ENV['GMAIL_TEST_USER_PASSWORD'],
     :authentication       => 'plain',
     :enable_starttls_auto => true  }
-  config.action_mailer.default_url_options = { :host => 'http://inviter.dev' }
+  config.action_mailer.default_url_options = { :protocol => 'http', :host => 'inviter.dev' }
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
