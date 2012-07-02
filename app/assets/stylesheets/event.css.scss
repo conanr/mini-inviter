@@ -1,10 +1,8 @@
-body {
-  font-family: $helvetica;
-}
-
 .navbar {
+  font-family: $arial-rounded;
   color: white;
-  @include linear-gradient(#8FDCE5, #3DC3D1, $deprecated-pos1: left center, $deprecated-pos2: left top);
+  /*@include linear-gradient(#8FDCE5, #3DC3D1, $deprecated-pos1: left center, $deprecated-pos2: left top);*/
+  background-color: $berry;
   @include box-shadow(0 0 5px 3px hsla(0, 0%, 0%, 0.65));
   margin: 10px;
   display: table;
@@ -36,20 +34,25 @@ body {
   @include background-image(url("/assets/main_bg.jpeg"));
   @include border-radius(10px);
   margin: 20px 50px 20px 50px;
+  font-family: $georgia;
+  color: $whale;
 }
 
 #get_started {
-  @include button;
+  @include button(shiny, $aloe);
+  font-family: $arial-rounded;
 }
 
 #signin {
-  @include button(shiny, #00ff00);
+  @include button(shiny, $wasabi);
   float: right;
   text-align: right;
+  font-family: $arial-rounded;
 }
 
 #signout {
-  @include button(shiny, #ff0000);
+  @include button(shiny, $spice);
+  font-family: $arial-rounded;
 /*  float: right;
   text-align: right;*/
 }
