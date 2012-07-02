@@ -38,6 +38,13 @@
   color: $whale;
 }
 
+.btn-submit {
+  @include button(pill, $aloe);
+  font-family: $arial-rounded;
+  font-size: 16px;
+  font-weight: bold;
+}
+
 #get_started {
   @include button(shiny, $aloe);
   font-family: $arial-rounded;
