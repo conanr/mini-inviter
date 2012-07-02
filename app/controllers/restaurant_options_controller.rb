@@ -8,7 +8,7 @@ class RestaurantOptionsController < ApplicationController
 
   def create
     @event = Event.find params[:event_id]
-    params[:restaurant].keys.each do |restaurant_id| 
+    params[:restaurant].keys.each do |restaurant_id|
       option = RestaurantOption.create(restaurant_id: restaurant_id)
       @event.restaurant_options << option
     end
