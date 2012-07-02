@@ -57,6 +57,24 @@ describe "site authentication" do
         end
       end
     end
+    
+    describe "with no existing events" do
+      it "redirects the user to the event create page" do
+        page.find("#facebook_login").click
+        URI.parse(current_url).path.should == new_event_path
+      end
+    end
+    
+    describe "with existing events" do
+      let!(:user)             { FactoryGirl.create :user, email: "n.bohr@example.org", first_name: "Niels", last_name: "Bohr"}
+      let!(:authentication)   { FactoryGirl.create :facebook_auth, user_id: user.id }
+      let!(:event)            { FactoryGirl.create :event, user_id: user.id }
+      
+      it "redirects the user to the event index page" do
+        page.find("#facebook_login").click
+        URI.parse(current_url).path.should == events_path
+      end
+    end
   end
   
   describe "loggin out" do

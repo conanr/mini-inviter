@@ -19,7 +19,6 @@ describe "Creating an new event" do
         
         # create the stub event
         party_name = "My Birthday Party"
-        page.find("#get_started").click
         within '#event_form' do
           fill_in 'event_name', with: party_name
         end

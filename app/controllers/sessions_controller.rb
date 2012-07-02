@@ -5,7 +5,11 @@ class SessionsController < ApplicationController
   def create
     user = User.from_oauth_hash(env["omniauth.auth"])
     session[:user_id] = user.id
-    redirect_to root_url, notice: "Signed in!"
+    if user.events && !user.events.empty?
+      redirect_to events_path, notice: "Signed in!"
+    else
+      redirect_to new_event_path, notice: "Signed in!"
+    end
   end
 
   def destroy
