@@ -1,3 +1,4 @@
+<%= render partial: 'shared/errors', locals: { object: @schedule } %>
 <%= form_for [@event, @schedule], :html => { :class => 'form-horizontal', :id => 'event_time_form' } do |f| %>
   <div class="control-group">
     <%= f.label :start_time, :class => 'control-label' %>
@@ -6,7 +7,7 @@
     </div>
   </div>
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary', :id => 'submit_event_time_form' %>
+    <%= f.submit nil, :class => 'btn-submit', :id => 'submit_event_time_form', :value => 'Save & Continue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 root_path, :class => 'btn' %>
   </div>
