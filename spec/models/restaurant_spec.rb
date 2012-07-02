@@ -43,22 +43,32 @@ describe Restaurant do
     restaurant.valid?.should be_false
   end
   
+  it "has an image url" do
+    restaurant = Restaurant.create name: "Hello", 
+        address: "1445 New York Ave. NW, Washington, DC 20005", 
+        ls_id: "123",
+        image_url: "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
+    restaurant.image_url.should == "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
+  end
+  
   describe ".import_from_ls_page" do
     it "creates a new restaurant from a scraped LS page" do
       scraped_page = Nokogiri::HTML(File.open('spec/support/assets/ls_toad_show_dc_indian_delight.html'))
       restaurant = Restaurant.import_from_ls_page scraped_page
-      restaurant.name.should    == "Indian Delight"
-      restaurant.address.should == "1100 Pennsylvania Avenue NW Washington, DC 20004"
-      restaurant.ls_id.should   == "7356"
+      restaurant.name.should      == "Indian Delight"
+      restaurant.address.should   == "1100 Pennsylvania Avenue NW Washington, DC 20004"
+      restaurant.ls_id.should     == "7356"
+      restaurant.image_url.should == "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
     end
     
     it "can pass in specific LS ID if known" do
       known_ls_id  = "1234"
       scraped_page = Nokogiri::HTML(File.open('spec/support/assets/ls_toad_show_dc_indian_delight.html'))
       restaurant = Restaurant.import_from_ls_page scraped_page, known_ls_id
-      restaurant.name.should    == "Indian Delight"
-      restaurant.address.should == "1100 Pennsylvania Avenue NW Washington, DC 20004"
-      restaurant.ls_id.should   == known_ls_id
+      restaurant.name.should      == "Indian Delight"
+      restaurant.address.should   == "1100 Pennsylvania Avenue NW Washington, DC 20004"
+      restaurant.ls_id.should     == known_ls_id
+      restaurant.image_url.should == "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
     end
     
     it "does not import the same restaurant twice" do
