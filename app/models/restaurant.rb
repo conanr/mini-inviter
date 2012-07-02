@@ -1,5 +1,5 @@
 class Restaurant < ActiveRecord::Base
-  attr_accessible :address, :name, :ls_id
+  attr_accessible :address, :name, :ls_id, :image_url
 
   has_many :restaurant_options
 
@@ -14,9 +14,10 @@ class Restaurant < ActiveRecord::Base
 
   def self.import_from_ls_page noko_page, ls_id = nil
     ls_id ||= noko_page.css('.yelp_review').first.attributes["id"].value[/\d+/]
-    name  = get_name_from_page(noko_page)
-    address = get_address_from_page(noko_page)
-    create(ls_id: ls_id, name: name, address: address)
+    create(ls_id: ls_id, 
+           name: get_name_from_page(noko_page), 
+           address: get_address_from_page(noko_page),
+           image_url: get_image_url_from_page(noko_page))
   end
 
   def self.all_close_to address
@@ -33,5 +34,9 @@ class Restaurant < ActiveRecord::Base
   def self.get_address_from_page(page)
     raw_data = page.css("div.info").css("ul").css("li").last.css("p").last.text
     raw_data.sub(" view map","")
+  end
+  
+  def self.get_image_url_from_page(page)
+    page.css('img.preview').first.attributes['src'].value
   end
 end
