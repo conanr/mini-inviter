@@ -17,7 +17,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.create params[:event]
-    redirect_to new_event_schedule_path @event
+    @event = current_user.events.new params[:event]
+    if @event.save
+      redirect_to new_event_schedule_path @event
+    else
+      render :new
+    end
   end
 end
