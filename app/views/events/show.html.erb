@@ -5,26 +5,32 @@
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @event.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
-  <dd><%= @event.user_id %></dd>
+  <dd id="event_name"><%= @event.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_time) %>:</strong></dt>
-  <dd><%= @event.start_time %></dd>
+  <dd id="event_start_time"><%= @event.start_time %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd><%= @event.full_address %></dd>
+  <dd id="event_address"><%= @event.full_address %></dd>
   <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
-  <dd>
+  <dd id="event_restaurants">
     <ul>
       <% @event.restaurant_options.each do |ro| %>
-        <li><%= ro.restaurant.name %></li>
+        <li><%= ro.restaurant.name %><span id="votes_for_<%= ro.id%>">(<%= pluralize(ro.vote_count, "vote") %>)</span></li>
       <% end %>
     </ul>
   </dd>
   <dt><strong><%= model_class.human_attribute_name(:invites) %>:</strong></dt>
-  <dd>
+  <dd id="event_invites">
     <ul>
       <% @event.invites.each do |i| %>
-        <li><%= i.contact.name %> (<%= i.contact.email %>)</li>
+        <li><%= i.contact.name %> (<%= i.contact.email %>) |
+          <span id="invitee_choice_<%= i.id %>">
+          <% if i.restaurant_vote %>
+            voted for <%= i.restaurant_vote.restaurant_option.name %>
+          <% else %>
+            not yet voted
+          <% end %>
+          </span>
+        </li>
       <% end %>
     </ul>
   </dd>
