@@ -1,0 +1,55 @@
+body {
+  font-family: $helvetica;
+}
+
+.navbar {
+  color: white;
+  @include linear-gradient(#8FDCE5, #3DC3D1, $deprecated-pos1: left center, $deprecated-pos2: left top);
+  @include box-shadow(0 0 5px 3px hsla(0, 0%, 0%, 0.65));
+  margin: 10px;
+  display: table;
+  width: 100%;
+  height: 40px;
+  
+  .brand {
+    font-size: 24px;
+  }
+  
+  a {
+    &:visited {
+      color: white;
+    }
+    &:hover {
+      color: red;
+    }
+    text-decoration: none;
+    color: white;
+  }
+}
+
+.nav {
+  display: table-cell;
+  text-align: center;
+}
+
+.main {
+  @include background-image(url("/assets/main_bg.jpeg"));
+  @include border-radius(10px);
+  margin: 20px 50px 20px 50px;
+}
+
+#get_started {
+  @include button;
+}
+
+#signin {
+  @include button(shiny, #00ff00);
+  float: right;
+  text-align: right;
+}
+
+#signout {
+  @include button(shiny, #ff0000);
+/*  float: right;
+  text-align: right;*/
+}
