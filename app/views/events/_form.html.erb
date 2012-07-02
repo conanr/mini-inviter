@@ -1,4 +1,4 @@
-<%= render :partial => 'shared/errors', :locals => { :target => @event } %>
+<%= render partial: 'shared/errors', locals: { object: @event } %>
 <%= form_for @event, :html => { :class => 'form-horizontal', :id => 'event_form' } do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
