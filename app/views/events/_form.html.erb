@@ -1,3 +1,4 @@
+<%= render :partial => 'shared/errors', :locals => { :target => @event } %>
 <%= form_for @event, :html => { :class => 'form-horizontal', :id => 'event_form' } do |f| %>
   <div class="control-group">
     <%= f.label :name, :class => 'control-label' %>
@@ -7,7 +8,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary', :id => 'submit_event_form', :value => 'Save & Continue' %>
+    <%= f.submit nil, :class => 'btn-submit', :id => 'submit_event_form', :value => 'Save & Continue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 root_path, :class => 'btn' %>
   </div>
