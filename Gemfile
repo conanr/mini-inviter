@@ -15,7 +15,8 @@ gem 'resque_mailer'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem 'twitter-bootstrap-rails'
+# gem 'twitter-bootstrap-rails'
+gem 'bourbon'
 
 # Gems used only for assets and not required
 # in production environments by default.
