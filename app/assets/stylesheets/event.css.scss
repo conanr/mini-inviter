@@ -43,6 +43,16 @@
   font-family: $arial-rounded;
 }
 
+#facebook_login {
+  @include button(shiny, $clementine);
+  font-family: $arial-rounded;
+}
+
+#foursquare_login {
+  @include button(shiny, $frosting);
+  font-family: $arial-rounded;
+}
+
 #signin {
   @include button(shiny, $wasabi);
   float: right;
