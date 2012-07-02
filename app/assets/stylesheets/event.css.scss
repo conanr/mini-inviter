@@ -1,7 +1,6 @@
 .navbar {
   font-family: $arial-rounded;
   color: white;
-  /*@include linear-gradient(#8FDCE5, #3DC3D1, $deprecated-pos1: left center, $deprecated-pos2: left top);*/
   background-color: $berry;
   @include box-shadow(0 0 5px 3px hsla(0, 0%, 0%, 0.65));
   margin: 10px;
@@ -70,6 +69,4 @@
 #signout {
   @include button(shiny, $spice);
   font-family: $arial-rounded;
-/*  float: right;
-  text-align: right;*/
 }
