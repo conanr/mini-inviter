@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
   end
-  
+
   def create
     user = User.from_oauth_hash(env["omniauth.auth"])
     session[:user_id] = user.id
