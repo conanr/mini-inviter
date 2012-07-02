@@ -1,6 +1,7 @@
-require 'resque'
+require 'resque/server'
+
 Inviter::Application.routes.draw do
-  mount Resque::Server.new, :at => "/resque"
+  mount Resque::Server, :at => "/resque"
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
   
