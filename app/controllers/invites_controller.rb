@@ -1,5 +1,7 @@
 class InvitesController < ApplicationController
   before_filter :authenticate_user
+  before_filter :find_event
+  before_filter :verify_event_owner
 
   def new
     @event = Event.find params[:event_id]
