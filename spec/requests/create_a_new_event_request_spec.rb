@@ -40,9 +40,11 @@ describe "Creating an new event" do
         # set a place for the event
         party_place = { street1: "1445 New York Ave. NW", street2: "Suite #200", city: "Washington", state: "DC", zip_code: "20005" }
         within '#event_address_form' do
-          party_place.each do |p|
-            fill_in "address_#{p.first}", with: p.last
-          end
+          fill_in "address_street1", with: party_place[:street1]
+          fill_in "address_street2", with: party_place[:street2]
+          fill_in "address_city", with: party_place[:city]
+          fill_in "address_zip_code", with: party_place[:zip_code]
+          select party_place[:state], from: "address_state"
         end
         page.find("#submit_event_address_form").click
         party_place.each do |p|
