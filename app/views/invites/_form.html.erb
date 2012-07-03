@@ -2,14 +2,14 @@
   <% (1..5).each do |i| %>
     <div class="control-group">
       <div class="controls">
-        <%= label_tag "new_contacts[#{i}][name]", "Contact ##{i}"%>
+        <%= label_tag "new_contacts[#{i}][name]", "Contact ##{i} (name,email)"%>
         <%= text_field_tag "new_contacts[#{i}][name]" %>
         <%= text_field_tag "new_contacts[#{i}][email]" %>
       </div>
     </div>
   <% end %>
   <div class="form-actions">
-    <%= submit_tag nil, :class => 'btn btn-primary', :id => 'submit_event_invite_form' %>
+    <%= submit_tag nil, :class => 'btn-submit', :id => 'submit_event_invite_form', :value => 'Save & Continue' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 root_path, :class => 'btn' %>
   </div>
