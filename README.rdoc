@@ -2,3 +2,5 @@
 
  * install Postgres
  * create a Postgres user 'rails_user' with a password 'password' with CREATEDB rights
+ 'CREATE USER rails_user WITH PASSWORD 'password' CREATEDB;'
+ * define ENV['BING_MAPS_API_KEY'] (ask me for key if you need one)
