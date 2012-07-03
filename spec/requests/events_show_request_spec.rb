@@ -34,46 +34,74 @@ describe "events show page" do
       before(:each) do
         visit signin_path
         page.find("#facebook_login").click
-        visit event_path event
       end
       
-      it "takes the user to the event show page" do
-        URI.parse(current_url).path.should == event_path(event)
-      end
-      
-      it "displays the event's details" do
-        page.find("#event_name").should have_content event.name
-        page.find("#event_start_time").should have_content event.start_time
-        page.find("#event_address").should have_content event.full_address
-      end
-      
-      it "displays all of the event's invitees" do
-        event.invites.each do |i|
-          page.find("#event_invites").should have_content i.name
-          page.find("#event_invites").should have_content i.email
+      context "for an event with no data other than a name" do
+        let!(:empty_event)  { user.events.create(name: "Empty Event") }
+
+        before(:each) do
+          visit event_path empty_event
         end
-      end
-      
-      it "displays all of the event's restaurants" do
-        event.restaurant_options.each do |ro|
-          page.find("#event_restaurants").should have_content ro.name
-        end
-      end
-      
-      context "if an invitee has voted for a restaurant" do
-        let!(:restaurant_vote)  { RestaurantVote.create invite_id: invite.id, restaurant_option_id: restaurant_option_2.id }
         
+        it "takes the user to the event show page" do
+          URI.parse(current_url).path.should == event_path(empty_event)
+        end
+      
+        it "displays the event's name" do
+          page.find("#event_name").should have_content empty_event.name
+        end
+        
+        it "displays placeholder text for all other info" do
+          page.find("#event_start_time").should have_content "No start time entered"
+          page.find("#event_address").should have_content "No address entered"
+          page.find("#event_restaurants").should have_content "No restaurants selected"
+          page.find("#event_invites").should have_content "No one has been invited"
+        end
+      end
+      
+      context "for an event with all expected info" do
         before(:each) do
           visit event_path event
         end
-        
-        it "displays the correct vote tally for each restaurant" do
-          page.find("#votes_for_#{restaurant_option_1.id}").text.should == "(0 votes)"
-          page.find("#votes_for_#{restaurant_option_2.id}").text.should == "(1 vote)"
+      
+        it "takes the user to the event show page" do
+          URI.parse(current_url).path.should == event_path(event)
         end
+      
+        it "displays the event's details" do
+          page.find("#event_name").should have_content event.name
+          page.find("#event_start_time").should have_content event.start_time
+          page.find("#event_address").should have_content event.full_address
+        end
+      
+        it "displays all of the event's invitees" do
+          event.invites.each do |i|
+            page.find("#event_invites").should have_content i.name
+            page.find("#event_invites").should have_content i.email
+          end
+        end
+      
+        it "displays all of the event's restaurants" do
+          event.restaurant_options.each do |ro|
+            page.find("#event_restaurants").should have_content ro.name
+          end
+        end
+      
+        context "if an invitee has voted for a restaurant" do
+          let!(:restaurant_vote)  { RestaurantVote.create invite_id: invite.id, restaurant_option_id: restaurant_option_2.id }
         
-        it "displays which restaurant an invitee voted for" do
-          page.find("#invitee_choice_#{invite.id}").should have_content restaurant_option_2.name
+          before(:each) do
+            visit event_path event
+          end
+        
+          it "displays the correct vote tally for each restaurant" do
+            page.find("#votes_for_#{restaurant_option_1.id}").text.should == "(0 votes)"
+            page.find("#votes_for_#{restaurant_option_2.id}").text.should == "(1 vote)"
+          end
+        
+          it "displays which restaurant an invitee voted for" do
+            page.find("#invitee_choice_#{invite.id}").should have_content restaurant_option_2.name
+          end
         end
       end
     end

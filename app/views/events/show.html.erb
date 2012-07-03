@@ -7,7 +7,7 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd id="event_name"><%= @event.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_time) %>:</strong></dt>
-  <dd id="event_start_time"><%= @event.schedule ? @event.start_time : "No start time entered"%></dd>
+  <dd id="event_start_time"><%= @event.schedule ? @event.start_time : "No start time entered" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
   <dd id="event_address"><%= @event.address ? @event.full_address : "No address entered" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
