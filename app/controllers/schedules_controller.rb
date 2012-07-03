@@ -16,16 +16,4 @@ class SchedulesController < ApplicationController
       render :new
     end
   end
-
-  private
-
-  def find_event
-    @event = Event.find params[:event_id]
-  end
-
-  def verify_event_owner
-    unless @event.user == current_user
-      raise ActionController::RoutingError.new('Not Found')
-    end
-  end
 end

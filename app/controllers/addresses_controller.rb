@@ -1,14 +1,19 @@
 class AddressesController < ApplicationController
   before_filter :authenticate_user
+  before_filter :find_event
+  before_filter :verify_event_owner
 
   def new
-    @event = Event.find params[:event_id]
     @address = Address.new
   end
 
   def create
-    @event = Event.find params[:event_id]
-    @event.address = Address.create params[:address]
-    redirect_to new_event_restaurant_option_path @event
+    @event.build_address params[:address]
+    if @event.address.save
+      redirect_to new_event_restaurant_option_path @event
+    else
+      @address = @event.address
+      render :new
+    end
   end
 end
