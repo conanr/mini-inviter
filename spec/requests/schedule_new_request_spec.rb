@@ -48,11 +48,11 @@ describe 'schedule new page' do
         page.find("#submit_event_time_form").click
       end
       
-      it "redirects the user back to the event schedule new form" do
+      it "redirects the user to the event address new form" do
         URI.parse(current_url).path.should == new_event_address_path(event)
       end
       
-      it "displays an error that the event name can not be in the past" do
+      it "saves the correct event start time" do
         event.schedule.start_time.should == start_time
       end
     end
