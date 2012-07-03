@@ -15,12 +15,12 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :authenticate_user
-  
+
   def find_event
     @event = Event.find params[:event_id]
   end
   helper_method :find_event
-  
+
   def verify_event_owner
     unless @event.user == current_user
       raise ActionController::RoutingError.new('Not Found')

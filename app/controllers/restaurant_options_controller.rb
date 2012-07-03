@@ -2,7 +2,7 @@ class RestaurantOptionsController < ApplicationController
   before_filter :authenticate_user
   before_filter :find_event
   before_filter :verify_event_owner
-  
+
   def new
     @nearby_restaurants = @event.nearby_restaurants.limit 10
   end
