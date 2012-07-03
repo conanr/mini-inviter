@@ -7,32 +7,43 @@
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd id="event_name"><%= @event.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:start_time) %>:</strong></dt>
-  <dd id="event_start_time"><%= @event.start_time %></dd>
+  <dd id="event_start_time"><%= @event.start_time ? @event.start_time : "No start time entered"%></dd>
   <dt><strong><%= model_class.human_attribute_name(:address) %>:</strong></dt>
-  <dd id="event_address"><%= @event.full_address %></dd>
+  <dd id="event_address"><%= @event.address ? @event.full_address : "No address entered" %></dd>
   <dt><strong><%= model_class.human_attribute_name(:restaurants) %>:</strong></dt>
   <dd id="event_restaurants">
-    <ul>
-      <% @event.restaurant_options.each do |ro| %>
-        <li><%= ro.restaurant.name %><span id="votes_for_<%= ro.id%>">(<%= pluralize(ro.vote_count, "vote") %>)</span></li>
-      <% end %>
-    </ul>
+    <% if @event.restaurant_options && @event.restaurant_options.count > 0 %>
+      <ul>
+        <% @event.restaurant_options.each do |ro| %>
+          <li><%= ro.restaurant.name %>
+            <span id="votes_for_<%= ro.id%>">(<%= pluralize(ro.vote_count, "vote") %>)</span>
+            <span id="ls_toad_link_<%= ro.id%>"><%= link_to "to ls site", "https://livingsocial.com/menus/locations/#{ro.ls_id}/order/edit" %></span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      No restaurants selected
+    <% end %>
   </dd>
   <dt><strong><%= model_class.human_attribute_name(:invites) %>:</strong></dt>
   <dd id="event_invites">
-    <ul>
-      <% @event.invites.each do |i| %>
-        <li><%= i.contact.name %> (<%= i.contact.email %>) |
-          <span id="invitee_choice_<%= i.id %>">
-          <% if i.restaurant_vote %>
-            voted for <%= i.restaurant_vote.restaurant_option.name %>
-          <% else %>
-            not yet voted
-          <% end %>
-          </span>
-        </li>
-      <% end %>
-    </ul>
+    <% if @event.invites && @event.invites.count > 0 %>
+      <ul>
+        <% @event.invites.each do |i| %>
+          <li><%= i.contact.name %> (<%= i.contact.email %>) |
+            <span id="invitee_choice_<%= i.id %>">
+            <% if i.restaurant_vote %>
+              voted for <%= i.restaurant_vote.restaurant_option.name %>
+            <% else %>
+              not yet voted
+            <% end %>
+            </span>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+       No one has been invited
+     <% end %>
   </dd>
 </dl>
 
