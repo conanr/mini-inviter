@@ -52,9 +52,11 @@ describe "Creating an new event" do
         # select restaurants for the event
         within '#restaurant_selection' do
           check restaurant_2.name
+          check restaurant_3.name
         end
         page.find("#submit_selection_form").click
         page.should have_content restaurant_2.name
+        page.should have_content restaurant_3.name
         
         # invite friends to the event
         invitees = [ { name: "John Doe",    email: "joedoe@example.com" },

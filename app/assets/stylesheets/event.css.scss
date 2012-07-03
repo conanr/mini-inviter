@@ -44,6 +44,11 @@
   font-weight: bold;
 }
 
+#alert {
+  font-size: 24px;
+  color: $spice;
+}
+
 #get_started {
   @include button(shiny, $aloe);
   font-family: $arial-rounded;
