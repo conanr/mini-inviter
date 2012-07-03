@@ -1,5 +1,5 @@
 class Address < ActiveRecord::Base
-  attr_accessible :city, :event, :state, :street1, :street2, :zip_code
+  attr_accessible :city, :state, :street1, :street2, :zip_code
 
   validates :street1, presence: true, allow_blank: false
   validates :city,    presence: true, allow_blank: false
