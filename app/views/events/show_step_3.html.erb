@@ -1,9 +1,0 @@
-<%= form_tag(process_step_3_path, :method => "post", id: "event_restaurant_form") do %>
-<% end %>
-<div>Event Start Time: <%= @event_time %></div>
-<div>Event Place: <%= @event_place %></div>
-<div id="progressbar" data-percent-done='50'></div>
-<div>selected restaurants here: empty to begin with</div>
-<div>restaurant carousel selector</div>
-<div>maybe a table of restaurants here</div>
-<div><div><%= link_to "Start Over", step_1_path, id: "start_over", class: "btn btn-danger" %></div><div<%= link_to "Go to Step #4", '#', id: "go_to_step_4", class: "btn btn-success" %></div></div>

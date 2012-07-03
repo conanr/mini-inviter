@@ -1,8 +1,0 @@
-<%= form_tag(process_step_1_path, :method => "post", id: "start_time_form") do %>
-<%= hidden_field_tag(:start_date, "", id: "start_date_field") %>
-<%= hidden_field_tag(:start_time, "", id: "start_time_field") %>
-<% end %>
-<div id="progressbar" data-percent-done='0'></div>
-<div id="datepicker"></div>
-<div id="timepicker"></div>
-<div><%= link_to "Go to Step #2", '#', id: "go_to_step_2", class: "btn btn-success" %></div>

@@ -1,7 +1,0 @@
-<%= form_tag(process_step_2_path, :method => "post", id: "event_place_form") do %>
-<% end %>
-<div>Event Start Time: <%= @event_time %>
-<div id="progressbar" data-percent-done='25'></div>
-<div>enter address where event will be held</div>
-<div>give it a name for re-use</div>
-<div><div><%= link_to "Start Over", step_1_path, id: "start_over", class: "btn btn-danger" %></div><div<%= link_to "Go to Step #3", '#', id: "go_to_step_3", class: "btn btn-success" %></div></div>
