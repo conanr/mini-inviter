@@ -2,43 +2,59 @@ require 'spec_helper'
 require 'nokogiri'
 
 describe Restaurant do
-  it "has a name" do
-    restaurant = Restaurant.create name: "Hello Restaurant"
-    restaurant.name.should == "Hello Restaurant"
-  end
+  let!(:restaurant_attributes)  { {
+                                    name: "Hello Restaurant",
+                                    address: "1445 New York Ave. NW, Washington, DC 20005",
+                                    ls_id: "2342",
+                                    image_url: "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
+                                } }
 
-  it "has an address" do
-    restaurant = Restaurant.create name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005"
-    restaurant.address.should == "1445 New York Ave. NW, Washington, DC 20005"
-  end
-
-  it "has a LivingSocial ID" do
-    restaurant = Restaurant.create name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342"
-    restaurant.ls_id.should == "2342"
-  end
-  
-  it "requires a name" do
-    restaurant = Restaurant.create address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "123"
-    restaurant.valid?.should be_false
-  end
+  context "using invalid data" do
+    it "rejects blank names" do
+      ["    ", nil].each do |invalid_name|
+        restaurant_attributes[:name] = invalid_name
+        restaurant = Restaurant.create restaurant_attributes
+        restaurant.valid?.should be_false
+      end
+    end
     
-  it "requires an address" do
-    restaurant = Restaurant.create name: "Hello Restaurant"
-    restaurant.valid?.should be_false
+    it "rejects blank addresses" do
+      ["    ", nil].each do |invalid_address|
+        restaurant_attributes[:name] = invalid_address
+        restaurant = Restaurant.create restaurant_attributes
+        restaurant.valid?.should be_false
+      end
+    end
+    
+    it "rejects duplicate LivingSocial ID" do
+      Restaurant.create restaurant_attributes
+      restaurant = Restaurant.create restaurant_attributes
+      restaurant.valid?.should be_false
+    end
   end
   
-  it "requires a unique LivingSocial ID" do
-    Restaurant.create name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "123"
-    restaurant = Restaurant.create name: "Goodbye", address: "123 11th St. NW, Washington, DC 20001", ls_id: "123"
-    restaurant.valid?.should be_false
-  end
-  
-  it "has an image url" do
-    restaurant = Restaurant.create name: "Hello", 
-        address: "1445 New York Ave. NW, Washington, DC 20005", 
-        ls_id: "123",
-        image_url: "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
-    restaurant.image_url.should == "https://a248.e.akamai.net/si.lscdn.net/imgs/8bff096f-e7a2-4c9b-93a3-e90845394aff/139_q60.jpg"
+  context "using valid data" do
+    let!(:restaurant)   { Restaurant.create restaurant_attributes }
+
+    it "accepts a non-blank name" do
+      restaurant.valid?.should be_true
+      restaurant.name.should == restaurant_attributes[:name]
+    end
+
+    it "accepts a non-blank address" do
+      restaurant.valid?.should be_true
+      restaurant.address.should == restaurant_attributes[:address]
+    end
+
+    it "accepts a unique LivingSocial ID" do
+      restaurant.valid?.should be_true
+      restaurant.ls_id.should == restaurant_attributes[:ls_id]
+    end
+
+    it "may have an image url" do
+      restaurant.valid?.should be_true
+      restaurant.image_url.should == restaurant_attributes[:image_url]
+    end
   end
   
   describe ".import_from_ls_page" do

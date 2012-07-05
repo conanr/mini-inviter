@@ -1,16 +1,24 @@
 require 'spec_helper'
 
 describe Schedule do
-  it 'requires a vaid start time' do
-    
-    event_schedule = Schedule.create
-    event_schedule.valid?.should be_false
+  context "using invalid data" do
+    it 'rejects blank times' do
+      event_schedule = Schedule.create
+      event_schedule.valid?.should be_false
+    end
 
-    event_schedule.update_attribute :start_time, Time.parse("Jan 01, 2009 12:00PM")
-    event_schedule.valid?.should be_false
-  
-    event_schedule.update_attribute :start_time, Time.parse("May 30, 2013 12:00PM")
-    event_schedule.valid?.should be_true
-    event_schedule.start_time.should == Time.parse("May 30, 2013 12:00PM")
+    it 'rejects times in the past' do
+      event_schedule = Schedule.create start_time: 3.days.ago
+      event_schedule.valid?.should be_false
+    end
+  end
+
+  context "using valid data" do
+    it 'accepts times in the future' do
+      valid_time = 3.days.from_now
+      event_schedule = Schedule.create start_time: valid_time
+      event_schedule.valid?.should be_true
+      event_schedule.start_time.should == valid_time
+    end
   end
 end
