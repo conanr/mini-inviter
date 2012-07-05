@@ -60,4 +60,9 @@ RSpec.configure do |config|
       :info     => { :first_name => "Tamara", :last_name => "Cane", :email => "t.cane@example.org" },
       :credentials => { :token => "D2FEDY0IBX0NY2QNE1SNL3NH22I530TIAIY5CXWPMUD44LT0" }
   })
+  
+  config.before(:each) do
+   Restaurant.any_instance.stub(:geocode).and_return([1,1])
+   Restaurant.stub(:near).and_return([])
+  end
 end
