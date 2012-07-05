@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :authenticate_user,
                 :find_event, :verify_event_owner
 
-  def index
-  end
-
   private
 
   def current_user
