@@ -3,40 +3,36 @@ require 'spec_helper'
 describe Contact do
   let!(:contact_attributes)  { { name: "Todd Fowler", email: "todd.fowler@example.com" } }
   
-  it "requires a non-blank name" do
-    contact_attributes[:name] = nil
-    contact = Contact.create contact_attributes
-    contact.valid?.should be_false
-    
-    contact_attributes[:name] = "    "
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_false
-    
-    contact_attributes[:name] = "Jean dePaul"
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_true
+  context "with invalid data" do
+    it "rejects blank names" do
+      ["    ", nil].each do |invalid_name|
+        contact_attributes[:name] = invalid_name
+        contact = Contact.create contact_attributes
+        contact.valid?.should be_false
+      end
+    end
+  
+    it "rejects invalid email addresses" do
+      ["   ", nil, "jean@", "@depaul.com"].each do |invalid_email|
+        contact_attributes[:email] = invalid_email
+        contact = Contact.create contact_attributes
+        contact.valid?.should be_false
+      end
+    end
   end
   
-  it "requires a valid email address" do
-    contact_attributes[:email] = nil
-    contact = Contact.create contact_attributes
-    contact.valid?.should be_false
+  context "with valid data" do
+    let!(:contact)  { Contact.create contact_attributes }
     
-    contact_attributes[:email] = "    "
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_false
-
-    contact_attributes[:email] = "jean@"
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_false
+    it "accepts a non-blank name" do
+      contact.valid?.should be_true
+      contact.name.should == contact_attributes[:name]
+    end
     
-    contact_attributes[:email] = "@depaul.com"
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_false
-
-    contact_attributes[:email] = "jean@example.com"
-    contact.update_attributes contact_attributes
-    contact.valid?.should be_true
+    it "accepts a valid email address" do
+      contact.valid?.should be_true
+      contact.email.should == contact_attributes[:email]
+    end
   end
   
   it "can not be a duplicate of an existing contact for the user"
