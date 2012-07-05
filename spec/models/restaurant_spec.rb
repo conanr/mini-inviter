@@ -17,16 +17,6 @@ describe Restaurant do
     restaurant.ls_id.should == "2342"
   end
   
-  it "has a latitude coordinate" do
-    restaurant = Restaurant.create name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342"
-    restaurant.latitude.should == 38.899356842041
-  end
-
-  it "has a longitude coordinate" do
-    restaurant = Restaurant.create name: "Hello", address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "2342"
-    restaurant.longitude.should == -77.033088684082
-  end
-
   it "requires a name" do
     restaurant = Restaurant.create address: "1445 New York Ave. NW, Washington, DC 20005", ls_id: "123"
     restaurant.valid?.should be_false
@@ -86,6 +76,7 @@ describe Restaurant do
     let!(:too_far_place) { Restaurant.create name: "Sine Irish Pub", address: "1301 S Joyce Street Arlington, VA 22202", ls_id: "7104" }
     
     it "returns all restaurants near to a given address" do
+      Restaurant.stub(:near).and_return([nearby_place])
       restaurants = Restaurant.all_close_to(home)
       restaurants.include?(nearby_place).should be_true
       restaurants.include?(too_far_place).should be_false
