@@ -4,7 +4,7 @@
 
  * create a Postgres user 'rails_user' with a password 'password' with CREATEDB rights
 
-```CREATE USER rails_user WITH PASSWORD 'password' CREATEDB;```
+    CREATE USER rails_user WITH PASSWORD 'password' CREATEDB;
 
  * configure the following environment variables:
   * ENV['BING_MAPS_API_KEY']
