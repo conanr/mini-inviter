@@ -1,4 +1,5 @@
-== Inviter
+# Inviter
+## General Info
 
 http://inviter.herokuapp.com
 
@@ -11,8 +12,7 @@ Sign-in using your Facebook or Foursquare account and set up an event in less th
 4: Invite your friends to your event
 5: See which restaurants your friends voted for & cater accordingly using LS Takeout & Delivery
 
-== Additional setup instructions
-
+## Additional setup instructions
  * install Postgres
 
  * create a Postgres user 'rails_user' with a password 'password' with CREATEDB rights
