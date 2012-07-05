@@ -8,6 +8,7 @@ describe "Creating an new event" do
       let!(:restaurant_3) { FactoryGirl.create :mayur_kabob_house }
       
       before(:each) do
+        Restaurant.stub(:near).and_return([restaurant_1, restaurant_2, restaurant_3])
         visit root_path
       end
       

@@ -7,6 +7,10 @@ describe 'Restaurant Options New Page' do
   let!(:restaurant_1)   { FactoryGirl.create :sushi_go_round }
   let!(:restaurant_2)   { FactoryGirl.create :cafe_mozart }
   let!(:restaurant_3)   { FactoryGirl.create :mayur_kabob_house }
+
+  before(:each) do
+    Restaurant.stub(:near).and_return([restaurant_1, restaurant_2, restaurant_3])
+  end
   
   context "when authenticated as the event owner" do
     before(:each) do

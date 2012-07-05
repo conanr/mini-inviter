@@ -28,6 +28,7 @@ describe Event do
     let!(:restaurant) { FactoryGirl.create :restaurant }
   
     it 'returns a collection of nearby restaurants' do
+      Restaurant.stub(:near).and_return([restaurant])
       event.nearby_restaurants.include?(restaurant).should be_true
     end
   end

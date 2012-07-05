@@ -4,7 +4,9 @@ class RestaurantOptionsController < ApplicationController
   before_filter :verify_event_owner
 
   def new
-    @nearby_restaurants = @event.nearby_restaurants.limit 10
+    @nearby_restaurants = @event.nearby_restaurants
+    # return up to 10 restaurants
+    @nearby_restaurants[0..9] unless @nearby_restaurants.empty?
   end
 
   def create
